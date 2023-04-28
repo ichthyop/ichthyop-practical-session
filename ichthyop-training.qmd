@@ -1,0 +1,61 @@
+---
+title: "Ichthyop practical session"
+format: revealjs
+author:
+    - name: Christophe Lett
+    - name: Nicolas Barrier
+---
+
+# Getting started
+
+## Install Java
+
+Ichthyop is a Java program. Therefore, Java is required.
+
+- Download the most recent version of Java here: [https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
+
+- Install Java
+
+- Open a `Terminal` or a `Cmd` prompt and type:
+
+```
+java -version
+```
+
+::: {.callout-warning}
+**Java > 11 is required!**
+:::
+
+## Install NetCDF {.smaller}
+
+Ichthyop also need the NetCDF-C library to run.
+
+**Linux**
+
+Open a Terminal and type:
+
+```
+sudo apt install netcdf4
+```
+
+**Mac Os X**
+
+Open a Terminal and type:
+
+```
+sudo port install netcdf4
+```
+
+**Windows**
+
+Download the pre-built libraries in [Unidata website](https://docs.unidata.ucar.edu/netcdf-c/current/winbin.html)
+
+::: {.callout-warning}
+During the install process, make sure that the location of the library is added to the `PATH`
+:::
+
+## Download Ichthyop
+
+- Create a `ichthyop` folder
+- Go to [https://github.com/ichthyop/ichthyop/releases/latest](https://github.com/ichthyop/ichthyop/releases/latest)
+- Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
