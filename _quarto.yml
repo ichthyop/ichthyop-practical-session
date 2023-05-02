@@ -1,11 +1,15 @@
-toc: true
-number-sections: true
+toc: false
+number-sections: false
 
 title: "Ichthyop practical session"
 format:
     revealjs:
         smaller: true
         theme: [default]
+
+    pdf:
+        toc: true
+        number-sections: true
 
 author:
     - name: Christophe Lett

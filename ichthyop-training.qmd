@@ -144,3 +144,75 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 Results of the different Ichthyop configurations
 
 :::
+
+## Vertical migration
+
+- In the `Mapping` section,  choose to represent the `depth`
+variable, with values -50, -30 and -10 m for min., med. and max., respectively.
+- Click on `Make maps`
+
+- In the configuration file, go to:
+```{mermaid}
+flowchart LR
+id1(Advanced)
+id2(Transport)
+id3(Vertical migration)
+id1 --> id2
+id2 --> id3
+```
+
+- Read the
+explanations at
+the top of the block. Click on `Enabled` and look at the default values of the parameters.
+
+## Vertical migration
+
+- Run the simulation with larval vertical migration. Note that the depth of larvae is now changing
+according to the vertical scheme specified, but that this movement has almost no effect on the
+overall larval distribution (@fig-mig2).
+
+- Change the vertical migration scheme such that larvae stay at -50 m depth day and night. Note that
+there is now a (small) effect (@fig-mig3)
+
+- Go back to the initial situation by unselecting vertical migration
+
+::: {#fig-migration layout-ncol=3}
+
+![No migration](img/vert2.png){#fig-mig1 width=250px}
+
+![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=250px}
+
+![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=250px}
+
+Different migration configurations
+
+:::
+
+## Growth
+
+- Go to:
+
+```{mermaid}
+flowchart LR
+id1(Advanced)
+id2(Biology)
+id3(Growth)
+id1 --> id2
+id2 --> id3
+```
+
+- Read the explanations at the top of the block and activate growth
+- Run the simulation and visualise the `length` variable using `Auto range` for the values and colours
+- Go to:
+
+```{mermaid}
+flowchart LR
+id1(Advanced)
+id2(Biology)
+id3(Early-life stages)
+id1 --> id2
+id2 --> id3
+```
+
+- Read the explanations at the top of the block.
+- Visualise the `stage` variable using `Auto range` for the values and colours.
