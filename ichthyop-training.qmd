@@ -59,3 +59,14 @@ During the install process, make sure that the location of the library is added 
 - Create a `ichthyop` folder
 - Go to [https://github.com/ichthyop/ichthyop/releases/latest](https://github.com/ichthyop/ichthyop/releases/latest)
 - Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
+
+## Running Ichthyop
+
+**Windows**
+
+- Double-click on the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file.
+
+**Linux/Mac Os X**
+
+- On the Terminal, navigate to the location of the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file using `cd`
+- Type `java -jar ichthyop-X.Y.Z-jar-with-dependencies.jar &`
