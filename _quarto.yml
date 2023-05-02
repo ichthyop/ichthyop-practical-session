@@ -1,0 +1,12 @@
+toc: true
+number-sections: true
+
+title: "Ichthyop practical session"
+format:
+    revealjs:
+        smaller: true
+        theme: [default]
+
+author:
+    - name: Christophe Lett
+    - name: Nicolas Barrier

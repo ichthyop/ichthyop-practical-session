@@ -1,29 +1,21 @@
----
-title: "Ichthyop practical session"
-format: revealjs
-author:
-    - name: Christophe Lett
-    - name: Nicolas Barrier
----
-
 # Getting started
 
 ## Install Java
 
 Ichthyop is a Java program. Therefore, Java is required.
 
-- Download the most recent version of Java here: [https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
+-   Download the most recent version of Java here: <https://www.oracle.com/java/technologies/downloads/>
 
-- Install Java
+-   Install Java
 
-- Open a `Terminal` or a `Cmd` prompt and type:
+-   Open a `Terminal` or a `Cmd` prompt and type:
 
 ```
 java -version
 ```
 
-::: {.callout-warning}
-**Java > 11 is required!**
+::: callout-warning
+**Java \> 11 is required!**
 :::
 
 ## Install NetCDF {.smaller}
@@ -50,23 +42,105 @@ sudo port install netcdf4
 
 Download the pre-built libraries in [Unidata website](https://docs.unidata.ucar.edu/netcdf-c/current/winbin.html)
 
-::: {.callout-warning}
+::: callout-warning
 During the install process, make sure that the location of the library is added to the `PATH`
 :::
 
 ## Download Ichthyop
 
-- Create a `ichthyop` folder
-- Go to [https://github.com/ichthyop/ichthyop/releases/latest](https://github.com/ichthyop/ichthyop/releases/latest)
-- Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
+-   Create a `ichthyop` folder
+-   Go to <https://github.com/ichthyop/ichthyop/releases/latest>
+-   Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
 
 ## Running Ichthyop
 
 **Windows**
 
-- Double-click on the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file.
+-   Double-click on the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file.
 
 **Linux/Mac Os X**
 
-- On the Terminal, navigate to the location of the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file using `cd`
-- Type `java -jar ichthyop-X.Y.Z-jar-with-dependencies.jar &`
+-   On the Terminal, navigate to the location of the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file using `cd`
+-   Type `java -jar ichthyop-X.Y.Z-jar-with-dependencies.jar &`
+
+# First simulation
+
+## Creation new configuration
+
+-   Create a new configuration file by clicking on the `New` button (@fig-new)
+
+![New configuration](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/step1-configure.png){#fig-new fig-align="center" height="200px"}
+
+## Choosing template
+
+-   Select the `ROMS 3D` template and click on `Create` (@fig-template)
+
+![Choosing template](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/new.png){#fig-template fig-align="center" height="400px"}
+
+## Running the simulation
+
+-   Run the simulation by clicking on the `Run simulation` button (@fig-run)
+
+![Running simulation](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/step2-simulate.png){#fig-run fig-align="center" height="200px"}
+
+## Visualization
+
+-   Visualise the results by clicking on the `Make maps` button (@fig-map)
+
+![Mapping outputs](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/step3-mapping.png){#fig-map fig-align="center" height="450"}
+
+## Expected results
+
+You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
+
+![Outputs of the first simulation (advection)](img/conf1.png){#fig-conf1 fig-align="center" height="500"}
+
+# New simulations
+
+## Exploring configuration file
+
+-   Explore the different processes and parameters contained in the configuration file and their default values (@fig-edit)
+
+![Exploring configuration file](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/edit.png){#fig-edit fig-align="center" height="500"}
+
+## Deactivating advection
+
+-   In the configuration file, go to:
+
+```{mermaid}
+   flowchart LR
+   id1(Advanced)
+   id2(Transport)
+   id3(Advection)
+   id1 --> id2
+   id2 --> id3
+```
+
+-   Disable advection by clicking on the `Enabled` tick box
+
+-   Save the configuration file by clicking the `Save` button.
+
+::: {.callout-warning}
+**Remember to save it after every change**
+:::
+
+- Run the simulation
+- Draw map
+- **What happens?**
+
+## Playing with advection/diffusion
+
+- Repeat the operations above by activating only diffusion
+- Repeat the operations above by activating both advection/diffusion
+
+::: {#fig-elephants layout-ncol=3}
+
+![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif}
+
+![No advection/Diffusion](img/conf3.png){#fig-noadv_dif}
+
+![Advection/Diffusion](img/conf4.png){#fig-adv_dif}
+
+Results of the different Ichthyop configurations
+
+:::
