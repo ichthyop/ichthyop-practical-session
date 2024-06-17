@@ -183,11 +183,11 @@ there is now a (small) effect (@fig-mig3)
 
 ::: {#fig-migration layout-ncol=3}
 
-![No migration](img/vert2.png){#fig-mig1 width=250px}
+![No migration](img/vert2.png){#fig-mig1 width=200px}
 
-![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=250px}
+![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=200px}
 
-![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=250px}
+![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=200px}
 
 Different migration configurations
 
@@ -221,3 +221,36 @@ id2 --> id3
 
 - Read the explanations at the top of the block.
 - Visualise the `stage` variable using `Auto range` for the values and colours.
+
+## Initial positions in a text file
+
+Unselect vertical migration and growth. Go to Advanced - Release - Drifters from text file.
+
+Select, click on the `Edit` button inside the `Value` field and create the file proposed by
+default (`benguela_drifters.txt`); it contains the initial positions of all individuals. Run the
+simulation and observe the individuals locations.
+
+Open the plot_traj_Ichthyop_v3_TP function in the R software. Try to understand the code.
+Go to Main - Time and Main - Output in Ichthyop to understand why the value of lasttime is
+61 in the R function. Adjust the path to the last file (ncdf format, .nc) created by Ichthyop in
+the `ichthyop-3.2b\output` directory of your computer. Install the R packages ncdf and maps if
+necessary, then execute the function (Figure 3). Make the necessary changes in the R function
+to plot only the last positions of individuals and check that they are the same as those plotted
+in the graphic interface of Ichthyop.
+
+![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px}
+
+## Release zones
+
+::: {#fig-relone layout-ncol=3}
+
+![](img/release1.png){#fig-rel1 width=200px}
+
+![](img/release2.png){#fig-rel2 width=200px}
+
+![](img/release3.png){#fig-rel3 width=200px}
+
+Final distribution of larvae and their depth (from red -15 m to white -7.5 m to green 0 m) for a release
+zone (purple polygon) located between the isobaths (a) 200–500 m (b) 500–1000 m (c) 1000–2000 m.
+
+:::
