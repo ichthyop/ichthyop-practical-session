@@ -183,14 +183,13 @@ there is now a (small) effect (@fig-mig3)
 
 ::: {#fig-migration layout-ncol=3}
 
-![No migration](img/vert2.png){#fig-mig1 width=100px}
+![](img/vert2.png){#fig-mig1 width=100px}
 
-![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=100px}
+![](img/vert3.png){#fig-mig2 width=100px}
 
-![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=100px}
+![](img/vert4.png){#fig-mig3 width=100px}
 
-Different migration configurations
-
+Different migration configurations. (a) No migration (b) Migration between -10 and -30 m (c) Constant depth (-50 m)
 :::
 
 ## Growth
