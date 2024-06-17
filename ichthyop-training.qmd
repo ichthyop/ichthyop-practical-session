@@ -140,11 +140,11 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 ::: {#fig-elephants layout-ncol=3}
 
-![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif}
+![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif width=100px}
 
-![No advection/Diffusion](img/conf3.png){#fig-noadv_dif}
+![No advection/Diffusion](img/conf3.png){#fig-noadv_dif width=100px}
 
-![Advection/Diffusion](img/conf4.png){#fig-adv_dif}
+![Advection/Diffusion](img/conf4.png){#fig-adv_dif width=100px}
 
 Results of the different Ichthyop configurations
 
@@ -234,7 +234,7 @@ Open the plot_traj_Ichthyop_v3_TP function in the R software. Try to understand 
 Go to Main - Time and Main - Output in Ichthyop to understand why the value of lasttime is
 61 in the R function. Adjust the path to the last file (ncdf format, .nc) created by Ichthyop in
 the `ichthyop-3.2b\output` directory of your computer. Install the R packages ncdf and maps if
-necessary, then execute the function (Figure 3). Make the necessary changes in the R function
+necessary, then execute the function (@fig-drift). Make the necessary changes in the R function
 to plot only the last positions of individuals and check that they are the same as those plotted
 in the graphic interface of Ichthyop.
 
@@ -270,14 +270,15 @@ to add a new zone). Select Advanced - Biology - Recruitment - In zones. Edit the
 and look at the parameters defining recruitment and at the recruitment zone. What is the
 distinction between a release zone and a recruitment zone? Check with “Preview” that the 3
 release zones and the destination zone appear.
+
 In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by
 clicking on “Add value”. In Main - Output, change the directory in which the simulation
 results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations,
 one for each release date.
+
 Open the compute_recruitment_Ichthyop_v3_TP function in the R software. Adjust the path
-to the TP1 directory, install the XML package if necessary, then execute the function (Figure
-5a). Go back to Ichthyop and visualise the trajectories of individuals for the first release date
-(Figure 5b). Note that in the end there is no individual inside the destination area! Look again
+to the TP1 directory, install the XML package if necessary, then execute the function (@fig-recr1). Go back to Ichthyop and visualise the trajectories of individuals for the first release date
+(@fig-recr2). Note that in the end there is no individual inside the destination area! Look again
 at the parameters used for recruitment to understand why the percentage of individuals
 transported from the release zones to the destination zone, as computed with the R function, is
 not zero.
@@ -299,9 +300,9 @@ stored to `output\TP2`. Save, run the simulation.
 
 Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path
 to the TP2 directory, install the fields and spam packages if necessary, then execute the
-function (Figure 6a). Go back to Ichthyop and visualise the trajectories of individuals for the
-first release date (Figure 6b). Note that the final positions of individuals in the north are very
-different in Figure 5b and Figure 6b. Why?
+function (@fig-recr3). Go back to Ichthyop and visualise the trajectories of individuals for the
+first release date (@fig-recr4). Note that the final positions of individuals in the north are very
+different in @fig-recr2 and (@fig-recr4). Why?
 
 ::: {#fig-reczone-bis layout-ncol=2}
 
@@ -309,7 +310,7 @@ different in Figure 5b and Figure 6b. Why?
 
 ![](img/recr4.png){#fig-recr4 width=120px}
 
-(a) Mean transport success from 3 release zones to 3 destination zones, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
+Mean transport success (a) from 3 release zones to 3 destination zones, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
 
 :::
 
@@ -318,7 +319,7 @@ different in Figure 5b and Figure 6b. Why?
 In TP2, delete the folder containing the simulation maps of the previous simulation, leaving
 only the 3 .nc files (that correspond to the 3 release dates). In the R software, open the
 compute_distances_Ichthyop_v3_TP function and adjust the path to the TP2 directory. Install
-the sp package if necessary and then execute the function (Figure 7). Do the same for TP1
+the sp package if necessary and then execute the function (@fig-disdis). Do the same for TP1
 (change the values of xlim and ylim in the hist function of R if necessary).
 
 ![Histograms of dispersal distances for the 3 files (corresponding here to 3 release dates).](img/disdis.png){#fig-disdis width=300px}
@@ -339,7 +340,7 @@ simulation” to make it correspond to the end of the simulation performed forwa
 “year 01 month 05 day 18”.
 
 Save, run the simulation and then plot the trajectories using the same script as before. Note
-that the trajectories are perfectly back-simulated (compare Figure 8 with Figure 3) except for
+that the trajectories are perfectly back-simulated (compare @fig-back with @fig-drift) except for
 a few of them which are missing (because the individuals were “dead” at the end of the
 simulation forward in time, for reaching the border of the domain).
 
