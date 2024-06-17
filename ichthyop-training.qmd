@@ -364,15 +364,26 @@ the sp package if necessary and then execute the function (@fig-disdis). Do the 
 
 ![Histograms of dispersal distances for the 3 files (corresponding here to 3 release dates).](img/disdis.png){#fig-disdis width=300px}
 
+::: {.content-visible when-format="revealjs"}
+## Backtracking (1)
+:::
+
+::: {.content-visible when-format="pdf"}
 ## Backtracking
+:::
 
 From the final positions of the simulated drifters trajectories (`Initial positions in a text file`
 section above), we're going to backtrack (i.e., track backwards in time) each drifter to its
 initial location.
 
+
 In Main - Advanced - Release, choose the `restart mode`. Read the explanation of the block
 and choose the NetCDF file that corresponds to the output of the drifters simulation
 performed before. If you forgot which file it is, or deleted it, then do it again!
+
+::: {.content-visible when-format="revealjs"}
+## Backtracking (2)
+:::
 
 In Main - Time, click on `Show hidden parameters` and for `Direction of the simulation`
 select `backward` instead of `forward`. Now we need to adjust the time for `Beginning of the
@@ -384,4 +395,4 @@ that the trajectories are perfectly back-simulated (compare @fig-back with @fig-
 a few of them which are missing (because the individuals were `dead` at the end of the
 simulation forward in time, for reaching the border of the domain).
 
-![Trajectories `backtracked` in Ichthyop and plotted in R.](img/back.png){#fig-back width=230px}
+![Trajectories backtracked in Ichthyop and plotted in R](img/back.png){#fig-back width=230px}

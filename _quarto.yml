@@ -4,6 +4,7 @@ number-sections: false
 title: "Ichthyop practical session"
 format:
     revealjs:
+        scrollable: true
         smaller: true
         theme: [default]
 
