@@ -223,15 +223,35 @@ id2 --> id3
 
 ## Initial positions in a text file
 
-Unselect vertical migration and growth. Go to Advanced - Release - Drifters from text file.
+Unselect vertical migration and growth. Go to
+
+```{mermaid}
+    graph LR;
+    id1(Advanced)
+    id2(Release)
+    id3(Drifters from text file)
+    id1 --> id2
+    id2 --> id3
+```
 
 Select, click on the `Edit` button inside the `Value` field and create the file proposed by
 default (`benguela_drifters.txt`); it contains the initial positions of all individuals. Run the
 simulation and observe the individuals locations.
 
-Open the plot_traj_Ichthyop_v3_TP function in the R software. Try to understand the code.
-Go to Main - Time and Main - Output in Ichthyop to understand why the value of lasttime is
-61 in the R function. Adjust the path to the last file (ncdf format, .nc) created by Ichthyop in
+Open the `plot_traj_Ichthyop_v3_TP` function in the R software. Try to understand the code.
+
+Go to:
+```{mermaid}
+    graph LR;
+    id1(Main)
+    id2(Time and Main)
+    id3(Output)
+    id1 --> id2
+    id2 --> id3
+```
+
+in Ichthyop to understand why the value of lasttime is
+61 in the R function. Adjust the path to the last file (ncdf format, `.nc`) created by Ichthyop in
 the `ichthyop-3.2b\output` directory of your computer. Install the R packages ncdf and maps if
 necessary, then execute the function (@fig-drift). Make the necessary changes in the R function
 to plot only the last positions of individuals and check that they are the same as those plotted
@@ -241,11 +261,32 @@ in the graphic interface of Ichthyop.
 
 ## Release zones
 
-In Ichthyop, unselect Advanced - Release - Drifters from text file. Select Advanced - Release -
-From zones. Edit the default file (benguela_zones.xml); it contains the release zones
-(“Release”) and the destination zones (“Recruitment”). These zones are defined by the
-geographic coordinates of a polygon, two isobaths (“Bathymetric mask”) and upper and lower
-depth (“Thickness”). Run the simulation (check with “Preview” that the release zone appears)
+In Ichthyop, unselect
+
+```{mermaid}
+    graph LR;
+    id1(Advanced)
+    id2(Release)
+    id3(Drifters from text file)
+    id1 --> id2
+    id2 --> id3
+```
+
+and select:
+
+```{mermaid}
+    graph LR;
+    id1(Advanced)
+    id2(Release)
+    id3(From zones)
+    id1 --> id2
+    id2 --> id3
+```
+
+Edit the default file (`benguela_zones.xml`); it contains the release zones
+(`Release`) and the destination zones (`Recruitment`). These zones are defined by the
+geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower
+depth (`Thickness`). Run the simulation (check with `Preview` that the release zone appears)
 and visualise larval depth. Do it again after changing the values of isobaths first to 500 and
 1000 m instead of 200 and 500 m, then with 1000 and 2000 m (@fig-relzone).
 
@@ -267,11 +308,11 @@ zone (purple polygon) located between the isobaths (a) 200–500 m (b) 500–100
 Define now 3 different release zones, each corresponding to one of the 3 seen before (click on
 to add a new zone). Select Advanced - Biology - Recruitment - In zones. Edit the zone file
 and look at the parameters defining recruitment and at the recruitment zone. What is the
-distinction between a release zone and a recruitment zone? Check with “Preview” that the 3
+distinction between a release zone and a recruitment zone? Check with `Preview` that the 3
 release zones and the destination zone appear.
 
 In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by
-clicking on “Add value”. In Main - Output, change the directory in which the simulation
+clicking on `Add value`. In Main - Output, change the directory in which the simulation
 results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations,
 one for each release date.
 
@@ -293,8 +334,8 @@ Mean (and standard error of the mean) transport success from 3 release zones to 
 :::
 
 Add now 2 new destination zones defined by isobaths 200–300 m and 300–500 m
-respectively. To avoid that individuals recruit in several zones, change “Stop moving when
-recruited” to True. In Main - Output, change the directory in which the simulation results are
+respectively. To avoid that individuals recruit in several zones, change `Stop moving when
+recruited` to True. In Main - Output, change the directory in which the simulation results are
 stored to `output\TP2`. Save, run the simulation.
 
 Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path
@@ -325,22 +366,22 @@ the sp package if necessary and then execute the function (@fig-disdis). Do the 
 
 ## Backtracking
 
-From the final positions of the simulated drifters trajectories (“Initial positions in a text file”
+From the final positions of the simulated drifters trajectories (`Initial positions in a text file`
 section above), we're going to backtrack (i.e., track backwards in time) each drifter to its
 initial location.
 
-In Main - Advanced - Release, choose the “restart mode”. Read the explanation of the block
+In Main - Advanced - Release, choose the `restart mode`. Read the explanation of the block
 and choose the NetCDF file that corresponds to the output of the drifters simulation
 performed before. If you forgot which file it is, or deleted it, then do it again!
 
-In Main - Time, click on “Show hidden parameters” and for “Direction of the simulation”
-select “backward” instead of “forward”. Now we need to adjust the time for “Beginning of the
-simulation” to make it correspond to the end of the simulation performed forward in time, i.e.
-“year 01 month 05 day 18”.
+In Main - Time, click on `Show hidden parameters` and for `Direction of the simulation`
+select `backward` instead of `forward`. Now we need to adjust the time for `Beginning of the
+simulation` to make it correspond to the end of the simulation performed forward in time, i.e.
+`year 01 month 05 day 18`.
 
 Save, run the simulation and then plot the trajectories using the same script as before. Note
 that the trajectories are perfectly back-simulated (compare @fig-back with @fig-drift) except for
-a few of them which are missing (because the individuals were “dead” at the end of the
+a few of them which are missing (because the individuals were `dead` at the end of the
 simulation forward in time, for reaching the border of the domain).
 
-![Trajectories “backtracked” in Ichthyop and plotted in R.](img/back.png){#fig-back width=230px}
+![Trajectories `backtracked` in Ichthyop and plotted in R.](img/back.png){#fig-back width=230px}
