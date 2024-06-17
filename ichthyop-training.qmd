@@ -183,11 +183,11 @@ there is now a (small) effect (@fig-mig3)
 
 ::: {#fig-migration layout-ncol=3}
 
-![No migration](img/vert2.png){#fig-mig1 width=200px}
+![No migration](img/vert2.png){#fig-mig1 width=100px}
 
-![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=200px}
+![Migration between -10 and -30 m](img/vert3.png){#fig-mig2 width=100px}
 
-![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=200px}
+![Constant depth (-50 m)](img/vert4.png){#fig-mig3 width=100px}
 
 Different migration configurations
 
@@ -242,15 +242,53 @@ in the graphic interface of Ichthyop.
 
 ## Release zones
 
-::: {#fig-relone layout-ncol=3}
+In Ichthyop, unselect Advanced - Release - Drifters from text file. Select Advanced - Release -
+From zones. Edit the default file (benguela_zones.xml); it contains the release zones
+(“Release”) and the destination zones (“Recruitment”). These zones are defined by the
+geographic coordinates of a polygon, two isobaths (“Bathymetric mask”) and upper and lower
+depth (“Thickness”). Run the simulation (check with “Preview” that the release zone appears)
+and visualise larval depth. Do it again after changing the values of isobaths first to 500 and
+1000 m instead of 200 and 500 m, then with 1000 and 2000 m (@fig-relzone).
 
-![](img/release1.png){#fig-rel1 width=200px}
+::: {#fig-relzone layout-ncol=3}
 
-![](img/release2.png){#fig-rel2 width=200px}
+![](img/release1.png){#fig-rel1 width=120px}
 
-![](img/release3.png){#fig-rel3 width=200px}
+![](img/release2.png){#fig-rel2 width=120px}
+
+![](img/release3.png){#fig-rel3 width=120px}
 
 Final distribution of larvae and their depth (from red -15 m to white -7.5 m to green 0 m) for a release
 zone (purple polygon) located between the isobaths (a) 200–500 m (b) 500–1000 m (c) 1000–2000 m.
+
+:::
+
+## Destination zones
+
+Define now 3 different release zones, each corresponding to one of the 3 seen before (click on
+to add a new zone). Select Advanced - Biology - Recruitment - In zones. Edit the zone file
+and look at the parameters defining recruitment and at the recruitment zone. What is the
+distinction between a release zone and a recruitment zone? Check with “Preview” that the 3
+release zones and the destination zone appear.
+In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by
+clicking on “Add value”. In Main - Output, change the directory in which the simulation
+results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations,
+one for each release date.
+Open the compute_recruitment_Ichthyop_v3_TP function in the R software. Adjust the path
+to the TP1 directory, install the XML package if necessary, then execute the function (Figure
+5a). Go back to Ichthyop and visualise the trajectories of individuals for the first release date
+(Figure 5b). Note that in the end there is no individual inside the destination area! Look again
+at the parameters used for recruitment to understand why the percentage of individuals
+transported from the release zones to the destination zone, as computed with the R function, is
+not zero.
+
+::: {#fig-relzone layout-ncol=3}
+
+![](img/recr1.png){#fig-recr1 width=230px}
+
+![](img/recr2.png){#fig-recr2 width=120px}
+
+Mean (and standard error of the mean) transport success from 3 release zones to a destination zone,
+for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
 
 :::
