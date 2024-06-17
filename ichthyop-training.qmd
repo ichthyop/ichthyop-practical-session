@@ -52,6 +52,11 @@ During the install process, make sure that the location of the library is added 
 -   Go to <https://github.com/ichthyop/ichthyop/releases/latest>
 -   Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
 
+## Download hydrographic files
+
+- Download the hydrographic on the Ichthyop Zenodo Community: <https://zenodo.org/records/10890690>
+- Unzip the archive file
+
 ## Running Ichthyop
 
 **Windows**
