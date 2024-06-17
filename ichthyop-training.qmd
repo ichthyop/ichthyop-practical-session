@@ -282,7 +282,7 @@ at the parameters used for recruitment to understand why the percentage of indiv
 transported from the release zones to the destination zone, as computed with the R function, is
 not zero.
 
-::: {#fig-relzone layout-ncol=3}
+::: {#fig-reczone layout-ncol=2}
 
 ![](img/recr1.png){#fig-recr1 width=230px}
 
@@ -290,5 +290,26 @@ not zero.
 
 Mean (and standard error of the mean) transport success from 3 release zones to a destination zone,
 for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
+
+:::
+
+Add now 2 new destination zones defined by isobaths 200–300 m and 300–500 m
+respectively. To avoid that individuals recruit in several zones, change “Stop moving when
+recruited” to True. In Main - Output, change the directory in which the simulation results are
+stored to output\TP2. Save, run the simulation.
+Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path
+to the TP2 directory, install the fields and spam packages if necessary, then execute the
+function (Figure 6a). Go back to Ichthyop and visualise the trajectories of individuals for the
+first release date (Figure 6b). Note that the final positions of individuals in the north are very
+different in Figure 5b and Figure 6b. Why?
+
+::: {#fig-reczone-bis layout-ncol=2}
+
+![](img/recr3.png){#fig-recr3 width=230px}
+
+![](img/recr4.png){#fig-recr4 width=120px}
+
+(a) Mean transport success from 3 release zones to 3 destination zones, for 3 release dates. The zones
+are shown in (b) with the final distribution of individuals for the first release date.
 
 :::
