@@ -288,15 +288,15 @@ not zero.
 
 ![](img/recr2.png){#fig-recr2 width=120px}
 
-Mean (and standard error of the mean) transport success from 3 release zones to a destination zone,
-for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
+Mean (and standard error of the mean) transport success from 3 release zones to a destination zone, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
 
 :::
 
 Add now 2 new destination zones defined by isobaths 200–300 m and 300–500 m
 respectively. To avoid that individuals recruit in several zones, change “Stop moving when
 recruited” to True. In Main - Output, change the directory in which the simulation results are
-stored to output\TP2. Save, run the simulation.
+stored to `output\TP2`. Save, run the simulation.
+
 Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path
 to the TP2 directory, install the fields and spam packages if necessary, then execute the
 function (Figure 6a). Go back to Ichthyop and visualise the trajectories of individuals for the
@@ -309,7 +309,38 @@ different in Figure 5b and Figure 6b. Why?
 
 ![](img/recr4.png){#fig-recr4 width=120px}
 
-(a) Mean transport success from 3 release zones to 3 destination zones, for 3 release dates. The zones
-are shown in (b) with the final distribution of individuals for the first release date.
+(a) Mean transport success from 3 release zones to 3 destination zones, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
 
 :::
+
+## Dispersal distances
+
+In TP2, delete the folder containing the simulation maps of the previous simulation, leaving
+only the 3 .nc files (that correspond to the 3 release dates). In the R software, open the
+compute_distances_Ichthyop_v3_TP function and adjust the path to the TP2 directory. Install
+the sp package if necessary and then execute the function (Figure 7). Do the same for TP1
+(change the values of xlim and ylim in the hist function of R if necessary).
+
+![Histograms of dispersal distances for the 3 files (corresponding here to 3 release dates).](img/disdis.png){#fig-disdis width=300px}
+
+## Backtracking
+
+From the final positions of the simulated drifters trajectories (“Initial positions in a text file”
+section above), we're going to backtrack (i.e., track backwards in time) each drifter to its
+initial location.
+
+In Main - Advanced - Release, choose the “restart mode”. Read the explanation of the block
+and choose the NetCDF file that corresponds to the output of the drifters simulation
+performed before. If you forgot which file it is, or deleted it, then do it again!
+
+In Main - Time, click on “Show hidden parameters” and for “Direction of the simulation”
+select “backward” instead of “forward”. Now we need to adjust the time for “Beginning of the
+simulation” to make it correspond to the end of the simulation performed forward in time, i.e.
+“year 01 month 05 day 18”.
+
+Save, run the simulation and then plot the trajectories using the same script as before. Note
+that the trajectories are perfectly back-simulated (compare Figure 8 with Figure 3) except for
+a few of them which are missing (because the individuals were “dead” at the end of the
+simulation forward in time, for reaching the border of the domain).
+
+![Trajectories “backtracked” in Ichthyop and plotted in R.](img/back.png){#fig-back width=230px}
