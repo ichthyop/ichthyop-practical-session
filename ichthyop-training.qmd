@@ -54,7 +54,7 @@ During the install process, make sure that the location of the library is added 
 
 ## Download hydrographic files
 
-- Download the hydrographic on the Ichthyop Zenodo Community: <https://zenodo.org/records/10890690>
+- Download the hydrographic on the Ichthyop Zenodo Community: <https://doi.org/10.5281/zenodo.10890689>
 - Unzip the archive file
 
 ## Running Ichthyop
@@ -78,11 +78,16 @@ During the install process, make sure that the location of the library is added 
 
 ## Choosing template
 
--   Select the `ROMS 3D` template and click on `Create` (@fig-template)
+-   Select the `Generic` template and click on `Create` (@fig-template)
 
 ![Choosing template](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/new.png){#fig-template fig-align="center" height="400px"}
 
 ## Running the simulation
+
+- Preview the simulation by clicking on the `Preview button` (@fig-prev)
+
+![Preview simulation](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/preview-simulation.png){#fig-run fig-align="center" height="200px"}
+
 
 -   Run the simulation by clicking on the `Run simulation` button (@fig-run)
 
@@ -90,6 +95,7 @@ During the install process, make sure that the location of the library is added 
 
 ## Visualization
 
+-
 -   Visualise the results by clicking on the `Make maps` button (@fig-map)
 
 ![Mapping outputs](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/step3-mapping.png){#fig-map fig-align="center" height="450"}

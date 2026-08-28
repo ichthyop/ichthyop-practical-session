@@ -7,3 +7,8 @@ ichthyop-training.tex
 ichthyop-training.pdf
 ichthyop-training.aux
 ichthyop-training.toc
+
+**/*.quarto_ipynb
+ichthyop-3.5.0.jar
+output*
+input

@@ -2,6 +2,9 @@
 
 To build the document:
 
+- Compile Ichthyop
+- Download input files
+
 - Download Quarto: [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/)
 - On a Terminal, type:
 
