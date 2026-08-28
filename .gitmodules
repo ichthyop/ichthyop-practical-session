@@ -1,0 +1,6 @@
+[submodule "ichthyop"]
+	path = ichthyop
+	url = https://github.com/ichthyop/ichthyop
+[submodule "ichthyop-python"]
+	path = ichthyop-python
+	url = https://github.com/ichthyop/ichthyop-python
