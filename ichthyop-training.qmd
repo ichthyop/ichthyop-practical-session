@@ -50,11 +50,13 @@ During the install process, make sure that the location of the library is added 
 
 -   Create a `ichthyop` folder
 -   Go to <https://github.com/ichthyop/ichthyop/releases/latest>
--   Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file.
+-   Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file, replacing `X.Y.Z` by the actual Ichthyop version number.
+- Move the `.jar` file in the `ichthyop` folder
 
 ## Download hydrographic files
 
-- Download the hydrographic on the Ichthyop Zenodo Community: <https://doi.org/10.5281/zenodo.10890689>
+- Download the hydrographic sample files on the Ichthyop Zenodo Community: <https://doi.org/10.5281/zenodo.10890689>
+- Move the `.zip` file in the `ichthyop` folder
 - Unzip the archive file
 
 ## Running Ichthyop
@@ -80,13 +82,13 @@ During the install process, make sure that the location of the library is added 
 
 -   Select the `Generic` template and click on `Create` (@fig-template)
 
-![Choosing template](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/new.png){#fig-template fig-align="center" height="400px"}
+![Choosing template](img/generic-conf.png){#fig-template fig-align="center" height="600px"}
 
 ## Running the simulation
 
 - Preview the simulation by clicking on the `Preview button` (@fig-prev)
 
-![Preview simulation](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/preview-simulation.png){#fig-run fig-align="center" height="200px"}
+![Preview simulation](img/preview.png){#fig-prev fig-align="center" height="300px"}
 
 
 -   Run the simulation by clicking on the `Run simulation` button (@fig-run)
@@ -95,7 +97,6 @@ During the install process, make sure that the location of the library is added 
 
 ## Visualization
 
--
 -   Visualise the results by clicking on the `Make maps` button (@fig-map)
 
 ![Mapping outputs](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/step3-mapping.png){#fig-map fig-align="center" height="450"}
@@ -107,6 +108,14 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 ![Outputs of the first simulation (advection)](img/conf1.png){#fig-conf1 fig-align="center" height="500"}
 
 # New simulations
+
+::: {.callout-note}
+
+In order to keep track of your different experiments/configuration files, we advise that
+you for any new experiments, you create a dedicated configuration file with
+a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
+
+:::
 
 ## Exploring configuration file
 
@@ -120,15 +129,12 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 ```{mermaid}
    flowchart LR
-   id1(Advanced)
    id2(Transport)
    id3(Advection)
-   id1 --> id2
    id2 --> id3
 ```
 
 -   Disable advection by clicking on the `Enabled` tick box
-
 -   Save the configuration file by clicking the `Save` button.
 
 ::: {.callout-warning}
@@ -141,34 +147,46 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 ## Playing with advection/diffusion
 
-- Repeat the operations above by activating only diffusion
-- Repeat the operations above by activating both advection/diffusion
+Activate horizontal diffusion in a similar way:
 
-::: {#fig-elephants layout-ncol=3}
+```{mermaid}
+   flowchart LR
+   id2(Transport)
+   id3(Horizontal dispersion)
+   id2 --> id3
+```
 
-![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif width=100px}
+- Make experiments with diffusion only, advection/diffusion and compare the results.
 
-![No advection/Diffusion](img/conf3.png){#fig-noadv_dif width=100px}
 
-![Advection/Diffusion](img/conf4.png){#fig-adv_dif width=100px}
+::: {#fig-adv-diff-exsp layout-ncol=4}
+
+![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif}
+
+![Diffusion only](img/conf3.png){#fig-noadv_dif}
+
+![Advection/Diffusion](img/conf4.png){#fig-adv_dif}
+
+![Advection only](img/conf1.png){#fig-adv-nodif}
 
 Results of the different Ichthyop configurations
 
 :::
 
-## Vertical migration
+## Displaying particle depths
 
 - In the `Mapping` section,  choose to represent the `depth`
 variable, with values -50, -30 and -10 m for min., med. and max., respectively.
 - Click on `Make maps`
+- What do you see?
+
+## Vertical migration
 
 - In the configuration file, go to:
 ```{mermaid}
 flowchart LR
-id1(Advanced)
 id2(Transport)
 id3(Vertical migration)
-id1 --> id2
 id2 --> id3
 ```
 
@@ -176,9 +194,7 @@ id2 --> id3
 explanations at
 the top of the block. Click on `Enabled` and look at the default values of the parameters.
 
-## Vertical migration
-
-- Run the simulation with larval vertical migration. Note that the depth of larvae is now changing
+- Run the simulation with larval vertical migration and display the results. Note that the depth of larvae is now changing
 according to the vertical scheme specified, but that this movement has almost no effect on the
 overall larval distribution (@fig-mig2).
 
@@ -204,28 +220,17 @@ Different migration configurations. (a) No migration (b) Migration between -10 a
 
 ```{mermaid}
 flowchart LR
-id1(Advanced)
-id2(Biology)
-id3(Growth)
+id1(Biology)
+id2(Growth)
+id3(Linear Growth)
 id1 --> id2
 id2 --> id3
 ```
 
 - Read the explanations at the top of the block and activate growth
 - Run the simulation and visualise the `length` variable using `Auto range` for the values and colours
-- Go to:
-
-```{mermaid}
-flowchart LR
-id1(Advanced)
-id2(Biology)
-id3(Early-life stages)
-id1 --> id2
-id2 --> id3
-```
-
-- Read the explanations at the top of the block.
-- Visualise the `stage` variable using `Auto range` for the values and colours.
+- Now change the dispay and visualise the `stage` variable using `Auto range` for the values and colours.
+- How do you interpret the results?
 
 ## Initial positions in a text file
 
@@ -233,37 +238,20 @@ Unselect vertical migration and growth. Go to
 
 ```{mermaid}
     graph LR;
-    id1(Advanced)
     id2(Release)
     id3(Drifters from text file)
-    id1 --> id2
     id2 --> id3
 ```
 
-Select, click on the `Edit` button inside the `Value` field and create the file proposed by
-default (`benguela_drifters.txt`); it contains the initial positions of all individuals. Run the
-simulation and observe the individuals locations.
+Enable the block.
 
-Open the `plot_traj_Ichthyop_v3_TP` function in the R software. Try to understand the code.
+Click on the `New` button inside the `Value` field. Name your file `benguela_drifters.txt` and click on `Save`.
 
-Go to:
-```{mermaid}
-    graph LR;
-    id1(Main)
-    id2(Time and Main)
-    id3(Output)
-    id1 --> id2
-    id2 --> id3
-```
+A window will pop-up. Read the explanation at the beginning of the file. Run a simulation.
 
-in Ichthyop to understand why the value of lasttime is
-61 in the R function. Adjust the path to the last file (ncdf format, `.nc`) created by Ichthyop in
-the `ichthyop-3.2b\output` directory of your computer. Install the R packages ncdf and maps if
-necessary, then execute the function (@fig-drift). Make the necessary changes in the R function
-to plot only the last positions of individuals and check that they are the same as those plotted
-in the graphic interface of Ichthyop.
+Display the particle trajectories by putting `depth` as the display variable.
 
-![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px}
+![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width=200px}
 
 ## Release zones
 
@@ -418,3 +406,32 @@ a few of them which are missing (because the individuals were `dead` at the end 
 simulation forward in time, for reaching the border of the domain).
 
 ![Trajectories backtracked in Ichthyop and plotted in R](img/back.png){#fig-back width=230px}
+
+
+
+
+
+<!--
+it contains the initial positions of all individuals. Run the
+simulation and observe the individuals locations.
+
+Open the `plot_traj_Ichthyop_v3_TP` function in the R software. Try to understand the code.
+
+Go to:
+```{mermaid}
+    graph LR;
+    id1(Main)
+    id2(Time and Main)
+    id3(Output)
+    id1 --> id2
+    id2 --> id3
+```
+
+in Ichthyop to understand why the value of lasttime is
+61 in the R function. Adjust the path to the last file (ncdf format, `.nc`) created by Ichthyop in
+the `ichthyop-3.2b\output` directory of your computer. Install the R packages ncdf and maps if
+necessary, then execute the function (@fig-drift). Make the necessary changes in the R function
+to plot only the last positions of individuals and check that they are the same as those plotted
+in the graphic interface of Ichthyop.
+
+![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px} -->
