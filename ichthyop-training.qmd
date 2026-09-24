@@ -251,53 +251,58 @@ A window will pop-up. Read the explanation at the beginning of the file. Run a s
 
 Display the particle trajectories by putting `depth` as the display variable.
 
-![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width=200px}
+![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width=300px}
 
 ## Release zones
 
-In Ichthyop, unselect
+In Ichthyop, disable
 
 ```{mermaid}
     graph LR;
-    id1(Advanced)
     id2(Release)
     id3(Drifters from text file)
-    id1 --> id2
     id2 --> id3
 ```
 
-and select:
+and enable:
 
 ```{mermaid}
     graph LR;
-    id1(Advanced)
     id2(Release)
     id3(From zones)
-    id1 --> id2
     id2 --> id3
 ```
 
-Edit the default file (`benguela_zones.xml`); it contains the release zones
-(`Release`) and the destination zones (`Recruitment`). These zones are defined by the
+On the `Zone file` section, click on `New`. Rename the zone file `benguela_zones.xml` and click on the `Save` button. Have a look at the Zone editor interface.
+
+The actual zone file contains one release zone
+(`Release`) and one destination zone (`Recruitment`). These zones are defined by the
 geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower
-depth (`Thickness`). Run the simulation (check with `Preview` that the release zone appears)
-and visualise larval depth. Do it again after changing the values of isobaths first to 500 and
-1000 m instead of 200 and 500 m, then with 1000 and 2000 m (@fig-relzone).
+depth (`Thickness`).
 
-::: {#fig-relzone layout-ncol=3}
+Preview the simulation to verify that the zone is properly set (@fig-preview-release).
 
-![](img/release1.png){#fig-rel1 width=120px}
+![Preview of release zone](img/preview-release.png){#fig-preview-release width=300px}
 
-![](img/release2.png){#fig-rel2 width=120px}
+What do you have only one zone displayed?
 
-![](img/release3.png){#fig-rel3 width=120px}
+Run the simulation and visualise larval depth.
 
-Final distribution of larvae and their depth (from red -15 m to white -7.5 m to green 0 m) for a release
-zone (purple polygon) located between the isobaths (a) 200–500 m (b) 500–1000 m (c) 1000–2000 m.
+Duplicate the previous release zone by setting different release isobaths:
 
-:::
+- 500m - 1000m
+- 1000m - 2000m
 
-::: {.content-visible when-format="pdf"}
+You should now have three differents release zones. Preview the release zones (@fig-preview-mulrel).
+**Make sure that all release zones have the same `Thickness` settings**
+
+![Preview of multiple release zones](img/preview-multiple-release.png){#fig-preview-mulrel width=300px}
+
+Run the simulation. Look at the trajectory as a function of release zone (@fig-traj-mulrel).
+
+![Distribution of larvae as a function of the release zone](img/multiple-release-traj.png){#fig-traj-mulrel width=300px}
+
+::: {.content-visible unless-format="revealjs"}
 ## Destination zones
 :::
 
@@ -305,11 +310,25 @@ zone (purple polygon) located between the isobaths (a) 200–500 m (b) 500–100
 ## Destination zones (1)
 :::
 
-Define now 3 different release zones, each corresponding to one of the 3 seen before (click on
-to add a new zone). Select Advanced - Biology - Recruitment - In zones. Edit the zone file
-and look at the parameters defining recruitment and at the recruitment zone. What is the
-distinction between a release zone and a recruitment zone? Check with `Preview` that the 3
-release zones and the destination zone appear.
+Go to:
+
+```{mermaid}
+    graph LR;
+    id1(Biology)
+    id2(Recruitment)
+    id3(In zones)
+    id1 --> id2
+    id2 --> id3
+```
+
+Look at the parameters defining recruitment and at the recruitment zone. What is the
+distinction between a release zone and a recruitment zone?
+
+Click on the `Edit` button in the `Zone file` parameter section. Select the previously defined zone file.
+
+Check with `Preview` that the 3 release zones and the destination zone appear.
+
+
 
 In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by
 clicking on `Add value`. In Main - Output, change the directory in which the simulation
