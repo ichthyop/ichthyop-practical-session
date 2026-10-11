@@ -72,6 +72,8 @@ During the install process, make sure that the location of the library is added 
 
 # First simulation
 
+In this section, we will get familiar with the use of Ichthyop and the use of the user interface
+
 ## Creation new configuration
 
 -   Create a new configuration file by clicking on the `New` button (@fig-new)
@@ -109,6 +111,8 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 ![Outputs of the first simulation (advection)](img/conf1.png){#fig-conf1 fig-align="center" height="500"}
 
 # New simulations
+
+In this section, we will learn how to activate/deactivate processes.
 
 ::: callout-note
 In order to keep track of your different experiments, we advise you to create a dedicated configuration file with a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
@@ -248,9 +252,13 @@ id2 --> id3
 
 # Release methods
 
+In this section, we will look at the most commonly used release methods.
+
 ## Initial positions in a text file
 
-Unselect vertical migration and growth. Go to
+- Unselect vertical migration and growth.
+
+- Go to
 
 ```{mermaid}
     graph LR;
@@ -259,13 +267,15 @@ Unselect vertical migration and growth. Go to
     id2 --> id3
 ```
 
-Enable the block.
+- Enable the block.
 
-Click on the `New` button inside the `Value` field. Name your file `benguela_drifters.txt` and click on `Save`.
+- Click on the `New` button inside the `Value` field. Name your file `benguela_drifters.txt` and click on `Save`.
 
-A window will pop-up. Read the explanation at the beginning of the file. Run a simulation.
+- A window will pop-up. Read the explanation at the beginning of the file. Save the file (do not edit it for the moment)
 
-Display the particle trajectories by putting `depth` as the display variable.
+- Run the simulation.
+
+- Display the particle trajectories by putting `depth` as the display variable.
 
 ![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width="300px"}
 
@@ -289,38 +299,49 @@ and enable:
     id2 --> id3
 ```
 
-On the `Zone file` section, click on `New`. Rename the zone file `benguela_zones.xml` and click on the `Save` button. Have a look at the Zone editor interface.
+- On the `Zone file` section, click on `New`.
+- Rename the zone file `benguela_zones.xml` and click on the `Save` button. A new window will open
+- Have a look at the Zone editor interface.
 
-The actual zone file contains one release zone (`Release`) and one destination zone (`Recruitment`). These zones are defined by the geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower depth (`Thickness`).
+- The actual zone file contains one release zone (`Release`) and one destination zone (`Recruitment`). These zones are defined by the geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower depth (`Thickness`).
 
-Preview the simulation to verify that the zone is properly set (@fig-preview-release).
+Preview the simulation to verify that the release zone is properly set (@fig-preview-release).
 
 ![Preview of release zone](img/preview-release.png){#fig-preview-release width="300px"}
 
-What do you have only one zone displayed?
+- What do you have only one zone displayed?
 
-Run the simulation and visualise larval depth.
+- Run the simulation and visualise trajectories.
 
-Duplicate the previous release zone by setting different release isobaths:
+- Duplicate the previous release zone (click on the `+` button to add a new zone) by setting different release isobaths:
+    -   500m - 1000m
+    -   1000m - 2000m
 
--   500m - 1000m
--   1000m - 2000m
+- Rename the zones by double-clicking on the name on the left panel.
 
-You should now have three differents release zones. Preview the release zones (@fig-preview-mulrel). **Make sure that all release zones have the same `Thickness` settings**
+- You should now have three differents release zones.
+
+- Preview the release zones (@fig-preview-mulrel).
+
+::: {.callout-caution}
+
+Make sure that all release zones have the same `Thickness` settings (15 m)
+
+:::
 
 ![Preview of multiple release zones](img/preview-multiple-release.png){#fig-preview-mulrel width="300px"}
 
-Run the simulation. Look at the trajectory as a function of release zone (@fig-traj-mulrel).
+- Run the simulation.
+- Display the trajectory as a function of th release zone release zone (@fig-traj-mulrel).
+- How do you interpret the results?
 
 ![Distribution of larvae as a function of the release zone](img/multiple-release-traj.png){#fig-traj-mulrel width="300px"}
 
-::: {.content-visible unless-format="revealjs"}
-## Destination zones
-:::
+# Destination zones
 
-::: {.content-visible when-format="revealjs"}
-## Destination zones (1)
-:::
+In this section, we will learn how to use recruitment zones.
+
+## Setting up recruitment zone
 
 Go to:
 
@@ -333,15 +354,185 @@ Go to:
     id2 --> id3
 ```
 
-Look at the parameters defining recruitment and at the recruitment zone. What is the distinction between a release zone and a recruitment zone?
+- Look at the parameters defining recruitment and at the recruitment zone. What is the distinction between a release zone and a recruitment zone?
 
-Click on the `Edit` button in the `Zone file` parameter section. Select the previously defined zone file.
+- Click on the `Edit` button in the `Zone file` parameter section. Select the previously defined zone file (`benguela_zones.xml`).
 
-Check with `Preview` that the 3 release zones and the destination zone appear (@fig-rel-rec)
+- Check with `Preview` that the 3 release zones and the destination zone appear (@fig-rel-rec)
 
 ![Preview of the three release zones and of the recruitment zone](img/preview-rel-rec.png){#fig-rel-rec width="230px"}
 
-Run the simulation and look at the trajectories
+- Run the simulation and look at the trajectories
+
+## Combining with growth
+
+- Reactivate the linear growth module (`Biology - Growth - Linear Growth`)
+- In the recruitment section, switch `Recruitment Criterion` to length
+- Run the simulation
+- Display the trajectories as a function of length (setting the maximum limit to 5 cm)
+- What do you see?
+
+## Adding a new zone
+
+- Now duplicate the recruitment zone but setting a bathymetric mask of 200–300 m
+- Previsualize the two zones (@fig-mulrel-mulrec)
+
+![Preview with multiple release and recruitment zones](img/fig-mulrel-mulrec.png){#fig-mulrel-mulrec}
+
+- Run the simulation and display the trajectory as a function of length.
+
+# Time management
+
+In this section, we will have a look at some time parameterization.
+
+- Come back to the initial configuration by re-creating a file from the generic template.
+
+## Multiple release events
+
+- Go to
+
+```{mermaid}
+    graph LR;
+id1(Release)
+id2(Schedule)
+id1 --> id2
+```
+
+- Set the `Use release schedule` to `True`.
+- Add release events as follows:
+
+```
+year 1900 month 05 day 05 at 12:00
+year 1900 month 05 day 15 at 12:00
+```
+
+- What happens?
+- Look at the time in the `input/roms-benguela.nc` file. In Python, do this as follows:
+
+```{python}
+import xarray as xr
+data = xr.open_dataset('input/roms-benguela.nc')
+data['scrum_time'].values
+```
+
+The above works if the NetCDF file follows the CF convention, i.e. if it contains a `unit` and a `calendar` attribute.
+
+If it does not, you will have numerical values. You need to convert it manually by providing the unit in CF form as follows.
+
+```{python}
+import cftime
+units = 'seconds since 1900-01-01 00:00'
+calendar = 'gregorian'
+data = xr.open_dataset('input/roms-benguela.nc', decode_times=False)
+cftime.num2date(data['scrum_time'].values, units, calendar)
+```
+
+In R, you should be able to see the dates as follows, providing the units as a combination
+of arguments to the `as.POSIXct` and `as.difftime` functions.
+
+
+```r
+library(ncdf4)
+
+# Open the NetCDF file
+nc <- nc_open("input/roms-benguela.nc")
+
+# Read the time variable
+scrum_time <- ncvar_get(nc, "scrum_time")
+
+nc_close(nc)
+
+# Define the origin (equivalent to 'seconds since 1900-01-01 00:00')
+origin <- as.POSIXct("1900-01-01 00:00:00", tz = "UTC")
+
+# Convert numeric seconds to datetime (equivalent to cftime.num2date)
+dates <- origin + as.difftime(scrum_time, units = "secs")
+```
+
+::: {.callout-note}
+
+To check whether the file has these attributes, you can see the file metadata using `ncdump -h` on Linux/Mac or visualize the
+file using the [Panoply](https://www.giss.nasa.gov/tools/panoply/download/) software
+
+:::
+
+- Considering the time values of the input file, what was the problem?
+- Change the release dates accordingly and re-run the simulation
+- Display the trajectory as a function of age
+- What do you see?
+
+![Multiple release events](img/multile-release-events.png){height=7cm #fig-multiple-release}
+
+- Go to `Simulation - Time` and set `Particle keep drifting` to `False`.
+- Re-run the simulation and see the result as a function of age
+- What is the difference with the previous run?
+
+::: {.callout-note}
+
+When using multiple release events, the total number of particles is the number of particles times the number
+of events. If 1000 particles in the release stain parameters and 2 events, 2000 particles in total
+
+:::
+
+::: {.callout-warning}
+
+The simulation start date must always be before the first release event. Ichthyop will run from start date to first release event
+without doing much (reading forcing files mostly).
+
+:::
+
+## Multiple start date
+
+- Deactivate the release schedule
+
+```{mermaid}
+    graph LR;
+id1(Simulation)
+id2(Time)
+id1 --> id2
+```
+
+- Activate `Show hidden parameters`
+- Select the `Beginning of simulation parameter`
+- Click on the `Add value` button.
+- Add the following dates
+
+```
+year 1900 month 05 day 05 at 12:00
+year 1900 month 05 day 10 at 12:00
+```
+
+- Run the simulation. Look at the progress bar. What do you see?
+- Look at the console. What is the name of the output file?
+- What is the different between this setting and the release schedule?
+
+::: {.callout-note}
+
+Serial parameters are used to perform sensity analysis. This can also be done by
+writting scripts (in Python or R) that would edit a configuration template
+and replace one parameter.
+
+This is usefull if you want to test hundreds of release dates
+
+:::
+
+## Backtracking
+
+TODO: back tracking section with release zone the recruitement zone!
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
 
 In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by clicking on `Add value`. In Main - Output, change the directory in which the simulation results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations, one for each release date.
 
@@ -406,21 +597,13 @@ Save, run the simulation and then plot the trajectories using the same script as
 ![Trajectories backtracked in Ichthyop and plotted in R](img/back.png){#fig-back width="230px"}
 
 ````{=html}
-<!--
+
 it contains the initial positions of all individuals. Run the
 simulation and observe the individuals locations.
 
 Open the `plot_traj_Ichthyop_v3_TP` function in the R software. Try to understand the code.
 
-Go to:
-```{mermaid}
-    graph LR;
-    id1(Main)
-    id2(Time and Main)
-    id3(Output)
-    id1 --> id2
-    id2 --> id3
-```
+Go to: `Main - Time and Main - Output`
 
 in Ichthyop to understand why the value of lasttime is
 61 in the R function. Adjust the path to the last file (ncdf format, `.nc`) created by Ichthyop in
@@ -429,5 +612,5 @@ necessary, then execute the function (@fig-drift). Make the necessary changes in
 to plot only the last positions of individuals and check that they are the same as those plotted
 in the graphic interface of Ichthyop.
 
-![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px} -->
-````
+![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px}
+-->

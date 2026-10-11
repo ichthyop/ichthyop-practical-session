@@ -12,3 +12,7 @@ ichthyop-training.toc
 ichthyop-3.5.0.jar
 output*
 input
+cfg
+*log
+*ipynb
+*sh
