@@ -51,13 +51,13 @@ During the install process, make sure that the location of the library is added 
 -   Create a `ichthyop` folder
 -   Go to <https://github.com/ichthyop/ichthyop/releases/latest>
 -   Download the `ichthyop-X.Y.Z-jar-with-dependencies.jar` binary file, replacing `X.Y.Z` by the actual Ichthyop version number.
-- Move the `.jar` file in the `ichthyop` folder
+-   Move the `.jar` file in the `ichthyop` folder
 
 ## Download hydrographic files
 
-- Download the hydrographic sample files on the Ichthyop Zenodo Community: <https://doi.org/10.5281/zenodo.10890689>
-- Move the `.zip` file in the `ichthyop` folder
-- Unzip the archive file
+-   Download the hydrographic sample files on the Ichthyop Zenodo Community: <https://doi.org/10.5281/zenodo.10890689>
+-   Move the `.zip` file in the `ichthyop` folder
+-   Unzip the archive file
 
 ## Running Ichthyop
 
@@ -80,16 +80,17 @@ During the install process, make sure that the location of the library is added 
 
 ## Choosing template
 
--   Select the `Generic` template and click on `Create` (@fig-template)
+-   Select the `Generic` template
+- Remame your configuration file (for example, `first_ichthyop_run`
+- Click on `Create` (@fig-template)
 
 ![Choosing template](img/generic-conf.png){#fig-template fig-align="center" height="600px"}
 
 ## Running the simulation
 
-- Preview the simulation by clicking on the `Preview button` (@fig-prev)
+-   Preview the simulation by clicking on the `Preview button` (@fig-prev)
 
 ![Preview simulation](img/preview.png){#fig-prev fig-align="center" height="300px"}
-
 
 -   Run the simulation by clicking on the `Run simulation` button (@fig-run)
 
@@ -109,12 +110,8 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 # New simulations
 
-::: {.callout-note}
-
-In order to keep track of your different experiments/configuration files, we advise that
-you for any new experiments, you create a dedicated configuration file with
-a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
-
+::: callout-note
+In order to keep track of your different experiments, we advise you to create a dedicated configuration file with a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
 :::
 
 ## Exploring configuration file
@@ -137,13 +134,13 @@ a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xm
 -   Disable advection by clicking on the `Enabled` tick box
 -   Save the configuration file by clicking the `Save` button.
 
-::: {.callout-warning}
-**Remember to save it after every change**
+::: callout-warning
+**Remember to save the configuration file after every change**
 :::
 
-- Run the simulation
-- Draw map
-- **What happens?**
+-   Run the simulation
+-   Draw map
+-   **What happens?**
 
 ## Playing with advection/diffusion
 
@@ -156,11 +153,9 @@ Activate horizontal diffusion in a similar way:
    id2 --> id3
 ```
 
-- Make experiments with diffusion only, advection/diffusion and compare the results.
+-   Make experiments with diffusion only, with both advection/diffusion and compare the results.
 
-
-::: {#fig-adv-diff-exsp layout-ncol=4}
-
+::: {#fig-adv-diff-exsp layout-ncol="4"}
 ![No advection/No diffusion](img/conf2.png){#fig-noadv_nodif}
 
 ![Diffusion only](img/conf3.png){#fig-noadv_dif}
@@ -170,53 +165,72 @@ Activate horizontal diffusion in a similar way:
 ![Advection only](img/conf1.png){#fig-adv-nodif}
 
 Results of the different Ichthyop configurations
-
 :::
 
 ## Displaying particle depths
 
-- In the `Mapping` section,  choose to represent the `depth`
-variable, with values -50, -30 and -10 m for min., med. and max., respectively.
-- Click on `Make maps`
-- What do you see?
+-   In the `Mapping` section, choose to represent the `depth` variable, with values -50, -30 and -10 m for minimum, medium and maximum, respectively.
+-   Click on `Make maps`
+-   What do you see?
 
 ## Vertical migration
 
-- In the configuration file, go to:
+-   In the configuration file, go to:
+
 ```{mermaid}
 flowchart LR
-id2(Transport)
+id1(Biology)
+id2(Movements)
 id3(Vertical migration)
 id2 --> id3
+id1 --> id2
 ```
 
-- Read the
-explanations at
-the top of the block. Click on `Enabled` and look at the default values of the parameters.
+-   Read the explanations at the top of the block. Click on `Enabled` and look at the default values of the parameters.
 
-- Run the simulation with larval vertical migration and display the results. Note that the depth of larvae is now changing
-according to the vertical scheme specified, but that this movement has almost no effect on the
-overall larval distribution (@fig-mig2).
+-   Run the simulation with larval vertical migration and display the results. Is there anything wrong?
 
-- Change the vertical migration scheme such that larvae stay at -50 m depth day and night. Note that
-there is now a (small) effect (@fig-mig3)
+- Go to the
 
-- Go back to the initial situation by unselecting vertical migration
+```{mermaid}
+flowchart LR
+id1(Simulation)
+id2(Output)
+id1 --> id2
+```
 
-::: {#fig-migration layout-ncol=3}
+and correct the record frequency to save outputs every three hours. Remember that, as indicated in the console:
 
-![](img/vert2.png){#fig-mig1 width=100px}
+$$
+N_{freq} = \dfrac{F_{out}}{\Delta t}
+$$
 
-![](img/vert3.png){#fig-mig2 width=100px}
+with $N_{freq}$ the record frequency parameter, $F_{out}$ the output frequency (**in seconds**) and $\Delta t$ the simulation time-steps (**in seconds**), which is available in the `Simulation - Time` section.
 
-![](img/vert4.png){#fig-mig3 width=100px}
+What value should we put for the record frequency to have outputs every 3h?
+
+- Set the new value for the record frequency parameter and re-run the simulation. Visualize the results.
+
+- What do you see now?
+
+- Have a look at the `Note that the depth of larvae is now changing according to the vertical scheme specified, but that this movement has almost no effect on the overall larval distribution (@fig-mig2).
+
+
+::: {#fig-migration layout-ncol="3"}
+![](img/vert2.png){#fig-mig1 width="100px"}
+
+![](img/vert3.png){#fig-mig2 width="100px"}
+
+![](img/vert4.png){#fig-mig3 width="100px"}
 
 Different migration configurations. (a) No migration (b) Migration between -10 and -30 m (c) Constant depth (-50 m)
 :::
 
 ## Growth
 
-- Go to:
+-  Deactivate vertical migration and reset tthe record frequency to 144.
+
+-   Go to:
 
 ```{mermaid}
 flowchart LR
@@ -227,10 +241,12 @@ id1 --> id2
 id2 --> id3
 ```
 
-- Read the explanations at the top of the block and activate growth
-- Run the simulation and visualise the `length` variable using `Auto range` for the values and colours
-- Now change the dispay and visualise the `stage` variable using `Auto range` for the values and colours.
-- How do you interpret the results?
+-   Read the explanations at the top of the block and activate growth
+-   Run the simulation and visualise the `length` variable using `Auto range`
+-   Now change the dispay and visualise the `stage` variable using `Auto range` for the values and colours.
+-   How do you interpret the results?
+
+# Release methods
 
 ## Initial positions in a text file
 
@@ -251,7 +267,7 @@ A window will pop-up. Read the explanation at the beginning of the file. Run a s
 
 Display the particle trajectories by putting `depth` as the display variable.
 
-![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width=300px}
+![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width="300px"}
 
 ## Release zones
 
@@ -275,14 +291,11 @@ and enable:
 
 On the `Zone file` section, click on `New`. Rename the zone file `benguela_zones.xml` and click on the `Save` button. Have a look at the Zone editor interface.
 
-The actual zone file contains one release zone
-(`Release`) and one destination zone (`Recruitment`). These zones are defined by the
-geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower
-depth (`Thickness`).
+The actual zone file contains one release zone (`Release`) and one destination zone (`Recruitment`). These zones are defined by the geographic coordinates of a polygon, two isobaths (`Bathymetric mask`) and upper and lower depth (`Thickness`).
 
 Preview the simulation to verify that the zone is properly set (@fig-preview-release).
 
-![Preview of release zone](img/preview-release.png){#fig-preview-release width=300px}
+![Preview of release zone](img/preview-release.png){#fig-preview-release width="300px"}
 
 What do you have only one zone displayed?
 
@@ -290,17 +303,16 @@ Run the simulation and visualise larval depth.
 
 Duplicate the previous release zone by setting different release isobaths:
 
-- 500m - 1000m
-- 1000m - 2000m
+-   500m - 1000m
+-   1000m - 2000m
 
-You should now have three differents release zones. Preview the release zones (@fig-preview-mulrel).
-**Make sure that all release zones have the same `Thickness` settings**
+You should now have three differents release zones. Preview the release zones (@fig-preview-mulrel). **Make sure that all release zones have the same `Thickness` settings**
 
-![Preview of multiple release zones](img/preview-multiple-release.png){#fig-preview-mulrel width=300px}
+![Preview of multiple release zones](img/preview-multiple-release.png){#fig-preview-mulrel width="300px"}
 
 Run the simulation. Look at the trajectory as a function of release zone (@fig-traj-mulrel).
 
-![Distribution of larvae as a function of the release zone](img/multiple-release-traj.png){#fig-traj-mulrel width=300px}
+![Distribution of larvae as a function of the release zone](img/multiple-release-traj.png){#fig-traj-mulrel width="300px"}
 
 ::: {.content-visible unless-format="revealjs"}
 ## Destination zones
@@ -321,77 +333,55 @@ Go to:
     id2 --> id3
 ```
 
-Look at the parameters defining recruitment and at the recruitment zone. What is the
-distinction between a release zone and a recruitment zone?
+Look at the parameters defining recruitment and at the recruitment zone. What is the distinction between a release zone and a recruitment zone?
 
 Click on the `Edit` button in the `Zone file` parameter section. Select the previously defined zone file.
 
-Check with `Preview` that the 3 release zones and the destination zone appear.
+Check with `Preview` that the 3 release zones and the destination zone appear (@fig-rel-rec)
 
+![Preview of the three release zones and of the recruitment zone](img/preview-rel-rec.png){#fig-rel-rec width="230px"}
 
+Run the simulation and look at the trajectories
 
-In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by
-clicking on `Add value`. In Main - Output, change the directory in which the simulation
-results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations,
-one for each release date.
+In Main - Time, add two new release dates for days 8 and 13 (same year, month and hour) by clicking on `Add value`. In Main - Output, change the directory in which the simulation results are stored to `output\TP1`. Save, run the simulation, this time there are 3 simulations, one for each release date.
 
 ::: {.content-visible when-format="revealjs"}
 ## Destination zones (2)
 :::
 
-Open the compute_recruitment_Ichthyop_v3_TP function in the R software. Adjust the path
-to the TP1 directory, install the XML package if necessary, then execute the function (@fig-recr1).
+Open the compute_recruitment_Ichthyop_v3_TP function in the R software. Adjust the path to the TP1 directory, install the XML package if necessary, then execute the function (@fig-recr1).
 
-Go back to Ichthyop and visualise the trajectories of individuals for the first release date
-(@fig-recr2). Note that in the end there is no individual inside the destination area! Look again
-at the parameters used for recruitment to understand why the percentage of individuals
-transported from the release zones to the destination zone, as computed with the R function, is
-not zero.
+Go back to Ichthyop and visualise the trajectories of individuals for the first release date (@fig-recr2). Note that in the end there is no individual inside the destination area! Look again at the parameters used for recruitment to understand why the percentage of individuals transported from the release zones to the destination zone, as computed with the R function, is not zero.
 
-::: {#fig-reczone layout-ncol=2}
+::: {#fig-reczone layout-ncol="2"}
+![](img/recr1.png){#fig-recr1 width="230px"}
 
-![](img/recr1.png){#fig-recr1 width=230px}
-
-![](img/recr2.png){#fig-recr2 width=120px}
+![](img/recr2.png){#fig-recr2 width="120px"}
 
 Mean (and standard error of the mean) transport success from 3 release zones to a destination zone, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
-
 :::
 
 ::: {.content-visible when-format="revealjs"}
 ## Destination zones (3)
 :::
 
-Add now 2 new destination zones defined by isobaths 200–300 m and 300–500 m
-respectively. To avoid that individuals recruit in several zones, change `Stop moving when
-recruited` to True. In Main - Output, change the directory in which the simulation results are
-stored to `output\TP2`. Save, run the simulation.
+Add now 2 new destination zones defined by isobaths 200–300 m and 300–500 m respectively. To avoid that individuals recruit in several zones, change `Stop moving when recruited` to True. In Main - Output, change the directory in which the simulation results are stored to `output\TP2`. Save, run the simulation.
 
-Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path
-to the TP2 directory, install the fields and spam packages if necessary, then execute the
-function (@fig-recr3). Go back to Ichthyop and visualise the trajectories of individuals for the
-first release date (@fig-recr4). Note that the final positions of individuals in the north are very
-different in @fig-recr2 and (@fig-recr4). Why?
+Open the compute_connectivity_Ichthyop_v3_TP function in the R software. Adjust the path to the TP2 directory, install the fields and spam packages if necessary, then execute the function (@fig-recr3). Go back to Ichthyop and visualise the trajectories of individuals for the first release date (@fig-recr4). Note that the final positions of individuals in the north are very different in @fig-recr2 and (@fig-recr4). Why?
 
-::: {#fig-reczone-bis layout-ncol=2}
+::: {#fig-reczone-bis layout-ncol="2"}
+![](img/recr3.png){#fig-recr3 width="230px"}
 
-![](img/recr3.png){#fig-recr3 width=230px}
-
-![](img/recr4.png){#fig-recr4 width=120px}
+![](img/recr4.png){#fig-recr4 width="120px"}
 
 Mean transport success (a) from 3 release zones to 3 destination zones, for 3 release dates. The zones are shown in (b) with the final distribution of individuals for the first release date.
-
 :::
 
 ## Dispersal distances
 
-In TP2, delete the folder containing the simulation maps of the previous simulation, leaving
-only the 3 .nc files (that correspond to the 3 release dates). In the R software, open the
-compute_distances_Ichthyop_v3_TP function and adjust the path to the TP2 directory. Install
-the sp package if necessary and then execute the function (@fig-disdis). Do the same for TP1
-(change the values of xlim and ylim in the hist function of R if necessary).
+In TP2, delete the folder containing the simulation maps of the previous simulation, leaving only the 3 .nc files (that correspond to the 3 release dates). In the R software, open the compute_distances_Ichthyop_v3_TP function and adjust the path to the TP2 directory. Install the sp package if necessary and then execute the function (@fig-disdis). Do the same for TP1 (change the values of xlim and ylim in the hist function of R if necessary).
 
-![Histograms of dispersal distances for the 3 files (corresponding here to 3 release dates).](img/disdis.png){#fig-disdis width=300px}
+![Histograms of dispersal distances for the 3 files (corresponding here to 3 release dates).](img/disdis.png){#fig-disdis width="300px"}
 
 ::: {.content-visible when-format="revealjs"}
 ## Backtracking (1)
@@ -401,35 +391,21 @@ the sp package if necessary and then execute the function (@fig-disdis). Do the 
 ## Backtracking
 :::
 
-From the final positions of the simulated drifters trajectories (`Initial positions in a text file`
-section above), we're going to backtrack (i.e., track backwards in time) each drifter to its
-initial location.
+From the final positions of the simulated drifters trajectories (`Initial positions in a text file` section above), we're going to backtrack (i.e., track backwards in time) each drifter to its initial location.
 
-
-In Main - Advanced - Release, choose the `restart mode`. Read the explanation of the block
-and choose the NetCDF file that corresponds to the output of the drifters simulation
-performed before. If you forgot which file it is, or deleted it, then do it again!
+In Main - Advanced - Release, choose the `restart mode`. Read the explanation of the block and choose the NetCDF file that corresponds to the output of the drifters simulation performed before. If you forgot which file it is, or deleted it, then do it again!
 
 ::: {.content-visible when-format="revealjs"}
 ## Backtracking (2)
 :::
 
-In Main - Time, click on `Show hidden parameters` and for `Direction of the simulation`
-select `backward` instead of `forward`. Now we need to adjust the time for `Beginning of the
-simulation` to make it correspond to the end of the simulation performed forward in time, i.e.
-`year 01 month 05 day 18`.
+In Main - Time, click on `Show hidden parameters` and for `Direction of the simulation` select `backward` instead of `forward`. Now we need to adjust the time for `Beginning of the simulation` to make it correspond to the end of the simulation performed forward in time, i.e. `year 01 month 05 day 18`.
 
-Save, run the simulation and then plot the trajectories using the same script as before. Note
-that the trajectories are perfectly back-simulated (compare @fig-back with @fig-drift) except for
-a few of them which are missing (because the individuals were `dead` at the end of the
-simulation forward in time, for reaching the border of the domain).
+Save, run the simulation and then plot the trajectories using the same script as before. Note that the trajectories are perfectly back-simulated (compare @fig-back with @fig-drift) except for a few of them which are missing (because the individuals were `dead` at the end of the simulation forward in time, for reaching the border of the domain).
 
-![Trajectories backtracked in Ichthyop and plotted in R](img/back.png){#fig-back width=230px}
+![Trajectories backtracked in Ichthyop and plotted in R](img/back.png){#fig-back width="230px"}
 
-
-
-
-
+````{=html}
 <!--
 it contains the initial positions of all individuals. Run the
 simulation and observe the individuals locations.
@@ -454,3 +430,4 @@ to plot only the last positions of individuals and check that they are the same 
 in the graphic interface of Ichthyop.
 
 ![Trajectories simulated in Ichthyop and plotted in R](img/driftfile.png){#fig-drift width=200px} -->
+````
