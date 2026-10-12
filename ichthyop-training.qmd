@@ -61,7 +61,7 @@ During the install process, make sure that the location of the library is added 
 
 ## Running Ichthyop
 
-**Windows**
+**Windows/Mac Os X**
 
 -   Double-click on the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file.
 
@@ -126,14 +126,7 @@ In order to keep track of your different experiments, we advise you to create a 
 
 ## Deactivating advection
 
--   In the configuration file, go to:
-
-```{mermaid}
-   flowchart LR
-   id2(Transport)
-   id3(Advection)
-   id2 --> id3
-```
+-   In the configuration file, go to: `Transport - Advection`
 
 -   Disable advection by clicking on the `Enabled` tick box
 -   Save the configuration file by clicking the `Save` button.
@@ -148,14 +141,7 @@ In order to keep track of your different experiments, we advise you to create a 
 
 ## Playing with advection/diffusion
 
-Activate horizontal diffusion in a similar way:
-
-```{mermaid}
-   flowchart LR
-   id2(Transport)
-   id3(Horizontal dispersion)
-   id2 --> id3
-```
+- Activate horizontal diffusion in a similar way: `Transport - Horizontal dispersion`
 
 -   Make experiments with diffusion only, with both advection/diffusion and compare the results.
 
@@ -179,29 +165,16 @@ Results of the different Ichthyop configurations
 
 ## Vertical migration
 
--   In the configuration file, go to:
+-   In the configuration file, go to `Biology - Movements - Vertical migration`
 
-```{mermaid}
-flowchart LR
-id1(Biology)
-id2(Movements)
-id3(Vertical migration)
-id2 --> id3
-id1 --> id2
-```
+
 
 -   Read the explanations at the top of the block. Click on `Enabled` and look at the default values of the parameters.
 
 -   Run the simulation with larval vertical migration and display the results. Is there anything wrong?
 
-- Go to the
+- Go to `Simulation - Output`
 
-```{mermaid}
-flowchart LR
-id1(Simulation)
-id2(Output)
-id1 --> id2
-```
 
 and correct the record frequency to save outputs every three hours. Remember that, as indicated in the console:
 
@@ -217,7 +190,7 @@ What value should we put for the record frequency to have outputs every 3h?
 
 - What do you see now?
 
-- Have a look at the `Note that the depth of larvae is now changing according to the vertical scheme specified, but that this movement has almost no effect on the overall larval distribution (@fig-mig2).
+- Do vertical movements impact the overall distribution? (@fig-mig2).
 
 
 ::: {#fig-migration layout-ncol="3"}
@@ -232,18 +205,10 @@ Different migration configurations. (a) No migration (b) Migration between -10 a
 
 ## Growth
 
--  Deactivate vertical migration and reset tthe record frequency to 144.
+-  Deactivate vertical migration and reset the record frequency to 144.
 
--   Go to:
+-   Go to `Biology - Growth - Linear Growth`
 
-```{mermaid}
-flowchart LR
-id1(Biology)
-id2(Growth)
-id3(Linear Growth)
-id1 --> id2
-id2 --> id3
-```
 
 -   Read the explanations at the top of the block and activate growth
 -   Run the simulation and visualise the `length` variable using `Auto range`
@@ -258,14 +223,9 @@ In this section, we will look at the most commonly used release methods.
 
 - Unselect vertical migration and growth.
 
-- Go to
+- Go to `Release - Drifters from text file`
 
-```{mermaid}
-    graph LR;
-    id2(Release)
-    id3(Drifters from text file)
-    id2 --> id3
-```
+
 
 - Enable the block.
 
@@ -281,24 +241,9 @@ In this section, we will look at the most commonly used release methods.
 
 ## Release zones {#sec-rel-zones}
 
-In Ichthyop, disable
+- In Ichthyop, disable `Release - Drifters from text file`
 
-```{mermaid}
-    graph LR;
-    id2(Release)
-    id3(Drifters from text file)
-    id2 --> id3
-```
-
-and enable:
-
-```{mermaid}
-    graph LR;
-    id2(Release)
-    id3(From zones)
-    id2 --> id3
-```
-
+- Enable `Release - From zones`
 - On the `Zone file` section, click on `New`.
 - Rename the zone file `benguela_zones.xml` and click on the `Save` button. A new window will open
 - Have a look at the Zone editor interface.
@@ -343,16 +288,7 @@ In this section, we will learn how to use recruitment zones.
 
 ## Setting up recruitment zone
 
-Go to:
-
-```{mermaid}
-    graph LR;
-    id1(Biology)
-    id2(Recruitment)
-    id3(In zones)
-    id1 --> id2
-    id2 --> id3
-```
+- Go to `Biology - Recruitment - In zones`
 
 - Look at the parameters defining recruitment and at the recruitment zone. What is the distinction between a release zone and a recruitment zone?
 
@@ -389,15 +325,7 @@ In this section, we will have a look at some time parameterization.
 
 ## Multiple release events
 
-- Go to
-
-```{mermaid}
-    graph LR;
-id1(Release)
-id2(Schedule)
-id1 --> id2
-```
-
+- Go to `Release - Schedule`
 - Set the `Use release schedule` to `True`.
 - Add release events as follows:
 
@@ -484,14 +412,7 @@ without doing much (reading forcing files mostly).
 ## Multiple start date
 
 - Deactivate the release schedule
-
-```{mermaid}
-    graph LR;
-id1(Simulation)
-id2(Time)
-id1 --> id2
-```
-
+- Go to `Simulation - Time`
 - Activate `Show hidden parameters`
 - Select the `Beginning of simulation parameter`
 - Click on the `Add value` button.
