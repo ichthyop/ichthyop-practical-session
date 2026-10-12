@@ -279,7 +279,7 @@ In this section, we will look at the most commonly used release methods.
 
 ![Trajectories simulated in Ichthyop and plotted in R](img/drifter-release.png){#fig-drift width="300px"}
 
-## Release zones
+## Release zones {#sec-rel-zones}
 
 In Ichthyop, disable
 
@@ -518,9 +518,16 @@ This is usefull if you want to test hundreds of release dates
 
 ## Backtracking
 
-TODO: back tracking section with release zone the recruitement zone!
+Ichthyop allows to to backtracking of particles, in order to determine where the particle comes from. It can be used for example to determine a spawning area.
 
-
+- Create a new configuration file
+- In `Simulation - Time`, set the release date to `year 1900 month 05 day 17 at 12:00`
+- Set the direction of simulation to `Backward`
+- Go in `Release - From zones` and enable the process.
+- Create a new release file as done in @sec-rel-zones
+- Remove the release zone by clicking on the `-` button.
+- Set the recruitment zone as a release zone.
+- Run the simulation and visualize the result.
 
 
 
