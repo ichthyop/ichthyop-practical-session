@@ -43,6 +43,8 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install Latex
         run: quarto install tinytex
 
       # Same command as build-doc.sh (which is not tracked, see .gitignore)
