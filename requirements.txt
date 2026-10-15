@@ -1,0 +1,8 @@
+xarray
+matplotlib
+numpy
+cftime
+pyshp
+cartopy
+netCDF4
+dask

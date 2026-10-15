@@ -1,0 +1,71 @@
+name: Publish Quarto document
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache input data
+        id: cache-input
+        uses: actions/cache@v4
+        with:
+          path: input
+          key: input-zenodo-10890690
+
+      - name: Download input data
+        if: steps.cache-input.outputs.cache-hit != 'true'
+        run: wget https://zenodo.org/records/10890690/files/input.zip && unzip -o input.zip && rm input.zip
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install jupyter -r requirements.txt
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      # Same command as build-doc.sh (which is not tracked, see .gitignore)
+      - name: Render
+        run: quarto render ichthyop-training.qmd --to html
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp ichthyop-training.html _site/index.html
+          cp -r ichthyop-training_files img _site/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
