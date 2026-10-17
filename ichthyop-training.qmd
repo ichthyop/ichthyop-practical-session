@@ -1,5 +1,5 @@
 
-# Introduction
+# Introduction {#sec-intro}
 
 In this training, we will learn how to use the Ichthyop Lagrangian software on a specific case study.
 
@@ -8,6 +8,7 @@ In this training, we will learn how to use the Ichthyop Lagrangian software on a
 - Dimensions: $N_{lat} = 37$, $N_{lon} = 25$, $N_{depth} = 32$
 - Resolution: $\approx 15\ km$
 - Domain: $Lon \in [15, 19]$, $lat \in [-35, -29.945]$ (cf. @fig-domain)
+- Maximum speed: $\approx 0.75\ m.s^{-1}$
 
 ![Domain of the CROCO Benguela simulation](img/fig-domain.png){#fig-domain}
 
@@ -30,34 +31,6 @@ java -version
 ::: callout-warning
 **Java \> 11 is required!**
 :::
-
-<!-- ## Install NetCDF {.smaller}
-
-In or also need the NetCDF-C library to run.
-
-**Linux**
-
-Open a Terminal and type:
-
-```
-sudo apt install netcdf4
-```
-
-**Mac Os X**
-
-Open a Terminal and type:
-
-```
-sudo port install netcdf4
-```
-
-**Windows**
-
-Download the pre-built libraries in [Unidata website](https://docs.unidata.ucar.edu/netcdf-c/current/winbin.html)
-
-::: callout-warning
-During the install process, make sure that the location of the library is added to the `PATH`
-::: -->
 
 ## Download Ichthyop
 
@@ -85,9 +58,9 @@ During the install process, make sure that the location of the library is added 
 
 # First simulation
 
-In this section, we will get familiar with the use of Ichthyop and the use of the user interface
+In this section, we will get familiar with the use of Ichthyop and its user interface
 
-## Creation new configuration
+## Creation new configuration {#sec-new-conf}
 
 -   Create a new configuration file by clicking on the `New` button (@fig-new)
 
@@ -123,27 +96,12 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 ![Outputs of the first simulation (advection)](img/conf1.png){#fig-conf1 fig-align="center" height="500"}
 
-## Changing transport duration and release date
-
-- Go to `Simulation - Time`
-- Go to `Beginning of simulation` and change the start date
-- Go to `Transport duration` (i.e. the PLD) and change the value
-
-:::{.callout-danger}
-
-You must be sure that the `Beginning of simulation` is after the first time value of the forcing file (here `1900-05-02 12:00`)
-and that the end of simulation (beginning date + transport duration) is before the last time value of the forcing file (here `1900-05-29 12:00`)
-
-:::
-
 # New simulations
 
-In this section, we will learn how to activate/deactivate processes.
-
-- First, go back to the `Simulation - Time` section and resets the beginning of simulation and transport duration to the original ones (`year 1900 month 05 day 02 at 12:00` and `0015 day(s) 00 hour(s) 00 minute(s)`)
+In this section, we will learn how to modify parameters and how to activate/deactivate processes.
 
 ::: callout-note
-In order to keep track of your different experiments, we advise you to create a dedicated configuration file with a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
+In order to keep track of your different experiments, we advise you to create a dedicated configuration file with a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.) by repeating the steps in @sec-new-conf
 :::
 
 ## Exploring configuration file
@@ -152,16 +110,82 @@ In order to keep track of your different experiments, we advise you to create a 
 
 ![Exploring configuration file](https://raw.githubusercontent.com/ichthyop/ichthyop/master/doc/console/_static/edit.png){#fig-edit fig-align="center" height="500"}
 
-## Deactivating advection
+- Especially, have a look at the following sections:
+    - `Simulation - Time`
+    - `Simulation - Output`
+    - `Dataset - Roms 3D`
+    - `Release - Release stain`
+    - `Transport - Advection`
 
--   In the configuration file, go to: `Transport - Advection`
+## Changing transport duration and release date
 
--   Disable advection by clicking on the `Enabled` tick box
--   Save the configuration file by clicking the `Save` button.
+- Go to `Simulation - Time`
+- Go to `Beginning of simulation` and change the start date
+- Go to `Transport duration` (i.e. the PLD) and change the value
 
 ::: callout-warning
 **Remember to save the configuration file after every change**
 :::
+
+:::{.callout-important}
+
+You must be sure that the `Beginning of simulation` is after the first time value of the forcing file (here `1900-05-02 12:00`)
+and that the end of simulation (beginning date + transport duration) is before the last time value of the forcing file (here `1900-05-29 12:00`). **Try to run a simulation that does not meet these requirements and see what happens**
+
+:::
+
+## Changing the time-step
+
+- Based on the CFL criteria:
+
+$$
+\dfrac{u \Delta t}{\Delta x} < 1
+$$
+
+and given the informations provided in @sec-intro, what would be the maximum time-step value (in seconds)?
+
+- Compare with the time-step actually set in `Simulation - Time`
+- Change the actual value with the one that you computed
+- Run the simulation and look at the console. Look at the map. What do you see?
+
+::: {.callout-tip}
+
+You can set the record frequency (`Simulation - Output`) to 2 for this experiment. It will save one value every two time-step
+
+:::
+
+- Change the value by setting the time-step to 10 times the value you computed.
+
+::: {.callout-tip}
+
+You can set the record frequency (`Simulation - Output`) to 1 for this experiment. It will save one value every time-step
+
+:::
+
+- Run the simulation. Look at the console. What do you see?
+
+- Look at the map. What do you see?
+
+::: {#fig-stab-exp layout-ncol="3"}
+![Original configuration](img/conf1.png){#fig-stable1}
+
+![Maximum possible time-step](img/stable.png){#fig-stable2}
+
+![Unstable time-step](img/unstable.png){#fig-unstable}
+
+Results of the different Ichthyop configurations with different time steps (600 seconds, maximum stable
+time-step and 10 times this stability time-step)
+:::
+
+
+## Deactivating advection
+
+- First, go back to the `Simulation - Time` section and resets the time step, beginning of simulation and transport duration to the original ones (`600`, `year 1900 month 05 day 02 at 12:00` and `0015 day(s) 00 hour(s) 00 minute(s)`). Also reset the frequency output to `144` (one snapshot /day)
+
+-   In the configuration file, go to: `Transport - Advection`
+-   Disable advection by clicking on the `Enabled` tick box
+-   Save the configuration file by clicking the `Save` button.
+
 
 -   Run the simulation
 -   Draw map
@@ -253,8 +277,6 @@ In this section, we will look at the most commonly used release methods.
 
 - Go to `Release - Drifters from text file`
 
-
-
 - Enable the block.
 
 - Click on the `New` button inside the `Value` field. Name your file `benguela_drifters.txt` and click on `Save`.
@@ -282,7 +304,7 @@ Preview the simulation to verify that the release zone is properly set (@fig-pre
 
 ![Preview of release zone](img/preview-release.png){#fig-preview-release width="300px"}
 
-- What do you have only one zone displayed?
+- Why do you have only one zone displayed?
 
 - Run the simulation and visualise trajectories.
 
@@ -353,17 +375,16 @@ In this section, we will have a look at some time parameterization.
 
 ## Multiple release events
 
-- Go to `Release - Schedule`
+- Go to `Release - Schedule` and read the explanations
 - Set the `Use release schedule` to `True`.
 - Add release events as follows:
 
 ```
 year 1900 month 05 day 05 at 12:00
-year 1900 month 05 day 10 at 12:00
+year 1900 month 05 day 15 at 12:00
 ```
 
-- What happens?
-- Considering the time values of the input file, what was the problem?
+- What happens? Considering the time values of the input file, what is the problem?
 - Change the release dates accordingly and re-run the simulation
 - Display the trajectory as a function of age
 - What do you see?
@@ -410,9 +431,8 @@ year 1900 month 05 day 10 at 12:00
 
 Serial parameters are used to perform sensity analysis. This can also be done by
 writting scripts (in Python or R) that would edit a configuration template
-and replace one parameter.
-
-This is usefull if you want to test hundreds of release dates
+and replace one parameter. Using scripts to replicate a configuration is
+strongly recommended.
 
 :::
 
@@ -429,7 +449,13 @@ Ichthyop allows to to backtracking of particles, in order to determine where the
 - Set the recruitment zone as a release zone.
 - Run the simulation and visualize the result.
 
+::: {#fig-bckg layout-ncol="2"}
+![Initial release in backward mode](img/back1.png.png){#fig-mig1 width="100px"}
 
+![Particle positions at the end of the backward simulation](img/back2.png){#fig-mig2 width="100px"}
+
+Example of backward trajectories simulated by Ichthyop
+:::
 
 
 
