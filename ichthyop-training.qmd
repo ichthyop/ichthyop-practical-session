@@ -1,5 +1,15 @@
 # Getting started
 
+In this training, we will learn how to use the Ichthyop Lagrangian software on a specific case study.
+
+- Hydrodynamical dataset: 3D ROMS simulation in the Benguela region
+- Simulation time-span: from `1900-05-02 12:00` to `1900-05-29 12:00`\
+- Dimensions: $N_{lat} = 37$, $N_{lon} = 25$, $N_{depth} = 32$
+- Resolution: $\approx 15\ km$
+- Domain: $Lon \in [15, 19]$, $lat \in [-35, -29.945]$ (cf. @fig-domain)
+
+![Domain of the CROCO Benguela simulation](img/fig-domain.png){#fig-domain}
+
 ## Install Java
 
 Ichthyop is a Java program. Therefore, Java is required.
@@ -10,7 +20,7 @@ Ichthyop is a Java program. Therefore, Java is required.
 
 -   Open a `Terminal` or a `Cmd` prompt and type:
 
-```
+```{bash}
 java -version
 ```
 
@@ -18,9 +28,9 @@ java -version
 **Java \> 11 is required!**
 :::
 
-## Install NetCDF {.smaller}
+<!-- ## Install NetCDF {.smaller}
 
-Ichthyop also need the NetCDF-C library to run.
+In or also need the NetCDF-C library to run.
 
 **Linux**
 
@@ -44,7 +54,7 @@ Download the pre-built libraries in [Unidata website](https://docs.unidata.ucar.
 
 ::: callout-warning
 During the install process, make sure that the location of the library is added to the `PATH`
-:::
+::: -->
 
 ## Download Ichthyop
 
@@ -67,7 +77,7 @@ During the install process, make sure that the location of the library is added 
 
 **Linux/Mac Os X**
 
--   On the Terminal, navigate to the location of the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file using `cd`
+-   On the Terminal, using the `cd` command, navigate to the `ichthyop` folder where the `ichthyop-X.Y.Z-jar-with-dependencies.jar` file  is stored.
 -   Type `java -jar ichthyop-X.Y.Z-jar-with-dependencies.jar &`
 
 # First simulation
@@ -83,7 +93,7 @@ In this section, we will get familiar with the use of Ichthyop and the use of th
 ## Choosing template
 
 -   Select the `Generic` template
-- Remame your configuration file (for example, `first_ichthyop_run`
+- Remame your configuration file (for example, `first_ichthyop_run`)
 - Click on `Create` (@fig-template)
 
 ![Choosing template](img/generic-conf.png){#fig-template fig-align="center" height="600px"}
@@ -110,9 +120,24 @@ You should see larval dispersal off Cape Town in South Africa (@fig-conf1).
 
 ![Outputs of the first simulation (advection)](img/conf1.png){#fig-conf1 fig-align="center" height="500"}
 
+## Changing transport duration and release date
+
+- Go to `Simulation - Time`
+- Go to `Beginning of simulation` and change the start date
+- Go to `Transport duration` (i.e. the PLD) and change the value
+
+:::{.callout-danger}
+
+You must be sure that the `Beginning of simulation` is after the first time value of the forcing file (here `1900-05-02 12:00`)
+and that the end of simulation (beginning date + transport duration) is before the last time value of the forcing file (here `1900-05-29 12:00`)
+
+:::
+
 # New simulations
 
 In this section, we will learn how to activate/deactivate processes.
+
+- First, go back to the `Simulation - Time` section and resets the beginning of simulation and transport duration to the original ones (`year 1900 month 05 day 02 at 12:00` and `0015 day(s) 00 hour(s) 00 minute(s)`)
 
 ::: callout-note
 In order to keep track of your different experiments, we advise you to create a dedicated configuration file with a consistent name (for example `roms-noadvection.xml`, `roms-advection-growth.xml`, etc.)
@@ -331,59 +356,10 @@ In this section, we will have a look at some time parameterization.
 
 ```
 year 1900 month 05 day 05 at 12:00
-year 1900 month 05 day 15 at 12:00
+year 1900 month 05 day 10 at 12:00
 ```
 
 - What happens?
-- Look at the time in the `input/roms-benguela.nc` file. In Python, do this as follows:
-
-```{python}
-import xarray as xr
-data = xr.open_dataset('input/roms-benguela.nc')
-data['scrum_time'].values
-```
-
-The above works if the NetCDF file follows the CF convention, i.e. if it contains a `unit` and a `calendar` attribute.
-
-If it does not, you will have numerical values. You need to convert it manually by providing the unit in CF form as follows.
-
-```{python}
-import cftime
-units = 'seconds since 1900-01-01 00:00'
-calendar = 'gregorian'
-data = xr.open_dataset('input/roms-benguela.nc', decode_times=False)
-cftime.num2date(data['scrum_time'].values, units, calendar)
-```
-
-In R, you should be able to see the dates as follows, providing the units as a combination
-of arguments to the `as.POSIXct` and `as.difftime` functions.
-
-
-```r
-library(ncdf4)
-
-# Open the NetCDF file
-nc <- nc_open("input/roms-benguela.nc")
-
-# Read the time variable
-scrum_time <- ncvar_get(nc, "scrum_time")
-
-nc_close(nc)
-
-# Define the origin (equivalent to 'seconds since 1900-01-01 00:00')
-origin <- as.POSIXct("1900-01-01 00:00:00", tz = "UTC")
-
-# Convert numeric seconds to datetime (equivalent to cftime.num2date)
-dates <- origin + as.difftime(scrum_time, units = "secs")
-```
-
-::: {.callout-note}
-
-To check whether the file has these attributes, you can see the file metadata using `ncdump -h` on Linux/Mac or visualize the
-file using the [Panoply](https://www.giss.nasa.gov/tools/panoply/download/) software
-
-:::
-
 - Considering the time values of the input file, what was the problem?
 - Change the release dates accordingly and re-run the simulation
 - Display the trajectory as a function of age
