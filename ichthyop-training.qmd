@@ -246,11 +246,11 @@ What value should we put for the record frequency to have outputs every 3h?
 
 
 ::: {#fig-migration layout-ncol="3"}
-![](img/vert2.png){#fig-mig1 width="100px"}
+![](img/vert2.png){#fig-mig1 width="200px"}
 
-![](img/vert3.png){#fig-mig2 width="100px"}
+![](img/vert3.png){#fig-mig2 width="200px"}
 
-![](img/vert4.png){#fig-mig3 width="100px"}
+![](img/vert4.png){#fig-mig3 width="200px"}
 
 Different migration configurations. (a) No migration (b) Migration between -10 and -30 m (c) Constant depth (-50 m)
 :::
