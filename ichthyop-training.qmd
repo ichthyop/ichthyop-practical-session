@@ -389,7 +389,7 @@ year 1900 month 05 day 15 at 12:00
 - Display the trajectory as a function of age
 - What do you see?
 
-![Multiple release events](img/multile-release-events.png){height=7cm #fig-multiple-release}
+![Multiple release events](img/multile-release-events.png){width=200px #fig-multiple-release}
 
 - Go to `Simulation - Time` and set `Particle keep drifting` to `False`.
 - Re-run the simulation and see the result as a function of age
@@ -450,9 +450,9 @@ Ichthyop allows to to backtracking of particles, in order to determine where the
 - Run the simulation and visualize the result.
 
 ::: {#fig-bckg layout-ncol="2"}
-![Initial release in backward mode](img/back1.png.png){#fig-mig1 width="100px"}
+![Initial release in backward mode](img/back1.png){#fig-back1 width="200px"}
 
-![Particle positions at the end of the backward simulation](img/back2.png){#fig-mig2 width="100px"}
+![Particle positions at the end of the backward simulation](img/back2.png){#fig-back2 width="200px"}
 
 Example of backward trajectories simulated by Ichthyop
 :::
