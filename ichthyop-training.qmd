@@ -1,4 +1,5 @@
-# Getting started
+
+# Introduction
 
 In this training, we will learn how to use the Ichthyop Lagrangian software on a specific case study.
 
@@ -9,6 +10,8 @@ In this training, we will learn how to use the Ichthyop Lagrangian software on a
 - Domain: $Lon \in [15, 19]$, $lat \in [-35, -29.945]$ (cf. @fig-domain)
 
 ![Domain of the CROCO Benguela simulation](img/fig-domain.png){#fig-domain}
+
+# Getting started
 
 ## Install Java
 
